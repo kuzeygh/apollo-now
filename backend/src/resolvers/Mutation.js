@@ -1,4 +1,4 @@
-import { books, authors } from '../store';
+const { books, authors } = require('../store');
 
 let bookId = 5;
 

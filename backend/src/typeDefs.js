@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server');
 
-export const typeDefs = gql`
+const typeDefs = gql`
   type Author {
     id: Int!
     firstName: String!
@@ -24,3 +24,5 @@ export const typeDefs = gql`
     addBook(title: String!, rating: Int!, authorId: Int!): Book!
   }
 `;
+
+module.exports = typeDefs;

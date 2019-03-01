@@ -1,9 +1,9 @@
 const { ApolloServer } = require('apollo-server');
-import { typeDefs } from './typeDefs';
-import Query from './resolvers/Query';
-import Mutation from './resolvers/Mutation';
-import Author from './resolvers/Author';
-import Book from './resolvers/Book';
+const typeDefs = require('./typeDefs');
+const Query = require('./resolvers/Query');
+const Mutation = require('./resolvers/Mutation');
+const Author = require('./resolvers/Author');
+const Book = require('./resolvers/Book');
 
 const server = new ApolloServer({
   typeDefs,
