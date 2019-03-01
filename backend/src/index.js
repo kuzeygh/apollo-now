@@ -1,8 +1,10 @@
 const { ApolloServer } = require('apollo-server');
 const { importSchema } = require('graphql-import');
 
-const path = require('path');
-const typeDefs = importSchema(path.resolve('src/schema.graphql'));
+// const path = require('path');
+// const typeDefs = importSchema(path.resolve('src/schema.graphql'));
+
+const typeDefs = require('./typeDefs');
 
 const Query = require('./resolvers/Query');
 const Mutation = require('./resolvers/Mutation');
