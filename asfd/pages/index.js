@@ -1,5 +1,5 @@
 import { Query } from 'react-apollo';
-import * as booksQL from '../lib/Queries/books';
+import * as booksQL from '../graphql/Queries/books';
 
 class IndexPage extends React.Component {
   render() {
