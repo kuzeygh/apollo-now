@@ -2,8 +2,8 @@ import Books from '../components/Books';
 
 const IndexPage = React.memo(() => (
   <>
-    <p>Hello</p>
-    {/* <Books /> */}
+    {/* <p>Hello</p> */}
+    <Books />
   </>
 ));
 
