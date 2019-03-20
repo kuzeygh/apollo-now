@@ -6,10 +6,6 @@ class IndexPage extends React.Component {
     return (
       <Query query={booksQL.BOOKS_QUERY}>
         {res => {
-          console.log(' : ----------------------------------');
-          console.log(' : IndexPage -> render -> res', res);
-          console.log(' : ----------------------------------');
-
           return (
             <ul>
               {res.data.books.map(book => (
