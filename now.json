@@ -1,11 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "backend/src/index.js", "use": "@now/node-server" },
-    { "src": "frontend/package.json", "use": "@now/next" }
-  ],
-  "routes": [
-    { "src": "/graphql", "dest": "backend/src/index.js" },
-    { "src": "/(.*)", "dest": "frontend/$1" }
-  ]
+  "builds": [{ "src": "frontend/next.config.js", "use": "@now/next" }],
+  "routes": [{ "src": "/(.*)", "dest": "frontend/$1" }]
 }
