@@ -1,6 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "backend/src/index.js", "use": "@now/node-server" }],
-  "routes": [{ "src": "/api/(.*)", "dest": "backend/src/index.js" }],
-  "name": "apollo-now"
+  "routes": [{ "src": "/api/(.*)", "dest": "backend/src/index.js" }]
 }

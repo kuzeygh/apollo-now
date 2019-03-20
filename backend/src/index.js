@@ -1,28 +1,17 @@
-const { ApolloServer } = require('apollo-server');
-const { importSchema } = require('graphql-import');
+import 'dotenv/config';
+import express from 'express';
+import createServer from './createServer';
 
-// const path = require('path');
-// const typeDefs = importSchema(path.resolve('src/schema.graphql'));
+const app = express();
+const server = createServer();
 
-const typeDefs = require('./typeDefs');
+server.applyMiddleware({ app, path: '/graphql' });
 
-const Query = require('./resolvers/Query');
-const Mutation = require('./resolvers/Mutation');
-const Author = require('./resolvers/Author');
-const Book = require('./resolvers/Book');
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers: {
-    Query,
-    Mutation,
-    Author,
-    Book
-  },
-  introspection: true,
-  playground: true
-});
-
-server.listen({ port: 6969 }).then(({ url }) => {
-  console.log(`Server ready at ${url}`);
+app.listen({ port: process.env.PORT || 4000 }, err => {
+  if (err) throw err;
+  console.log(
+    `Apollo Server ready at http://localhost:${process.env.PORT}${
+      server.graphqlPath
+    }`
+  );
 });

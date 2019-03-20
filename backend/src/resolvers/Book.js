@@ -1,7 +1,23 @@
-const { books, authors } = require('../store');
+import books from '../db/books';
 
-const Book = {
-  author: book => authors.find(author => author.id === book.authorId)
+let bookId = 5;
+
+export default {
+  Query: {
+    books: () => books
+  },
+
+  Mutation: {
+    addBook: (parent, { title }) => {
+      bookId++;
+
+      const newBook = {
+        id: bookId,
+        title
+      };
+
+      books.push(newBook);
+      return newBook;
+    }
+  }
 };
-
-module.exports = Book;
