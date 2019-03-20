@@ -1,10 +1,11 @@
-import initApollo from './initApollo';
 import Head from 'next/head';
 import { getDataFromTree } from 'react-apollo';
+import initApollo from './initApollo';
 
-export default App => {
-  return class WithApollo extends React.Component {
+export default App =>
+  class Apollo extends React.PureComponent {
     static displayName = 'withApollo(App)';
+
     static async getInitialProps(ctx) {
       const { Component, router } = ctx;
 
@@ -31,6 +32,7 @@ export default App => {
           // Prevent Apollo Client GraphQL errors from crashing SSR.
           // Handle them in components via the data.error prop:
           // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+          // eslint-disable-next-line no-console
           console.error('Error while running `getDataFromTree`', error);
         }
 
@@ -57,4 +59,3 @@ export default App => {
       return <App {...this.props} apolloClient={this.apolloClient} />;
     }
   };
-};
