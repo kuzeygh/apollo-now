@@ -1,7 +1,7 @@
 import { Query } from 'react-apollo';
-import * as booksQL from '../graphql/Queries/books';
+import * as booksQL from '../lib/Queries/books';
 
-class IndexPage extends React.Component {
+class Books extends React.PureComponent {
   render() {
     return (
       <Query query={booksQL.BOOKS_QUERY}>
@@ -19,4 +19,4 @@ class IndexPage extends React.Component {
   }
 }
 
-export default IndexPage;
+export default Books;
