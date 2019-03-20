@@ -2,24 +2,28 @@ import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'isomorphic-unfetch';
-import { devGraphQLEndpoint } from '../config';
+// import { devGraphQLEndpoint } from '../config';
 
 let apolloClient = null;
 
-function createClient(initialState) {
+if (!process.browser) {
+  global.fetch = fetch;
+}
+
+const createClient = initialState => {
   const httpLink = createHttpLink({
-    uri: devGraphQLEndpoint,
-    credentials: 'include',
-    fetch
+    uri: '/graphql'
+    // credentials: 'include',
+    // fetch
   });
 
   return new ApolloClient({
-    connectToDevTools: process.browser,
-    ssrMode: !process.browser,
     link: httpLink,
-    cache: new InMemoryCache().restore(initialState || {})
+    cache: new InMemoryCache().restore(initialState || {}),
+    ssrMode: !process.browser,
+    connectToDevTools: process.browser
   });
-}
+};
 
 export default function initApollo(initialState) {
   if (!process.browser) {
