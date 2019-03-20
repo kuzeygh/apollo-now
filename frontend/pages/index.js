@@ -1,12 +1,9 @@
-import Head from 'next/head';
-import Home from '../components/Home/Home';
+import Books from '../components/Books';
 
 const IndexPage = React.memo(() => (
   <>
-    <Head>
-      <title>Git Poll | Home</title>
-    </Head>
-    <Home />
+    {/* <p>Hello</p> */}
+    <Books />
   </>
 ));
 
