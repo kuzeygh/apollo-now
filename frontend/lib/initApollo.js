@@ -8,8 +8,8 @@ let apolloClient = null;
 const createClient = initialState => {
   const httpLink = createHttpLink({
     uri: 'http://localhost:6969/graphql',
-    credentials: 'same-origin',
-    // credentials: 'include'
+    // credentials: 'same-origin',
+    // credentials: 'include',
     fetch
   });
 

@@ -10,8 +10,6 @@ export default () =>
     typeDefs,
     resolvers,
     context: ({ req, res }) => {
-      console.log('JWT_SECRET: ', process.env.JWT_SECRET);
-
       return { req, res, prisma };
     },
     tracing: true,
