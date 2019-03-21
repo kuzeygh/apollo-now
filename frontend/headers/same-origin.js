@@ -1,4 +1,5 @@
 // no CORS settings server-side
+// The default value for credentials is "same-origin"
 
 // Request URL: http://localhost:6969/graphql
 // Request Method: OPTIONS

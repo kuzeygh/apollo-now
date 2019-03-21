@@ -1,4 +1,5 @@
 // no CORS settings server-side
+// allow sending credentials to other domains
 
 // Access to fetch at 'http://localhost:6969/graphql' from origin 'https://apollo-now-git-master.hmmchase.now.sh' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
 
