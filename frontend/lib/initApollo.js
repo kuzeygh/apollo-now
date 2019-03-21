@@ -1,4 +1,3 @@
-// import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -14,7 +13,7 @@ if (!process.browser) {
 const createClient = initialState => {
   const httpLink = createHttpLink({
     uri: 'http://localhost:6969/graphql',
-    credentials: 'include'
+    credentials: 'same-origin'
     // fetch
   });
 
@@ -25,18 +24,6 @@ const createClient = initialState => {
     connectToDevTools: process.browser
   });
 };
-
-// function createClient(initialState) {
-//   return new ApolloClient({
-//     connectToDevTools: process.browser,
-//     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
-//     link: new HttpLink({
-//       uri: 'http://localhost:6969/graphql', // Server URL (must be absolute)
-//       credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
-//     }),
-//     cache: new InMemoryCache().restore(initialState || {})
-//   });
-// }
 
 export default function initApollo(initialState) {
   if (!process.browser) {
