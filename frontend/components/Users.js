@@ -1,24 +1,24 @@
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 
-export const BOOKS_QUERY = gql`
-  query BOOKS_QUERY {
-    books {
+export const USERS_QUERY = gql`
+  query USERS_QUERY {
+    Users {
       id
-      title
+      email
     }
   }
 `;
 
-const Books = React.memo(() => (
-  <Query query={BOOKS_QUERY}>
+const Users = React.memo(() => (
+  <Query query={USERS_QUERY}>
     {({ data, error, loading }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error: {error.message}</p>;
       return (
         <ul>
-          {data.books.map(book => (
-            <li key={book.id}>{book.title}</li>
+          {data.users.map(user => (
+            <li key={user.id}>{user.email}</li>
           ))}
         </ul>
       );
@@ -26,4 +26,4 @@ const Books = React.memo(() => (
   </Query>
 ));
 
-export default Books;
+export default Users;

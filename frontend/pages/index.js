@@ -1,8 +1,8 @@
-import Books from '../components/Books';
+import Users from '../components/Users';
 
 const IndexPage = React.memo(() => (
   <>
-    <Books />
+    <Users />
   </>
 ));
 
