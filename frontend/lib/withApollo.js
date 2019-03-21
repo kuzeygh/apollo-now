@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { getDataFromTree } from 'react-apollo';
-import PropTypes from 'prop-types';
 import initApollo from './initApollo';
 
 export default App =>
@@ -50,10 +49,6 @@ export default App =>
         apolloState
       };
     }
-
-    static propTypes = {
-      apolloState: PropTypes.objectOf(PropTypes.object).isRequired
-    };
 
     constructor(props) {
       super(props);
