@@ -1,6 +1,7 @@
 {
   "name": "apollo-now",
   "version": 2,
+  "public": true,
   "builds": [
     { "src": "backend/src/index.js", "use": "@now/node-server" },
     { "src": "frontend/package.json", "use": "@now/next" }
