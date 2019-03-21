@@ -42,8 +42,8 @@ export default withApollo(
       ssrMode: !process.browser,
       connectToDevTools: process.browser
     });
-  },
-  {
-    getDataFromTree: 'ssr'
   }
+  // {
+  //   getDataFromTree: 'ssr'
+  // }
 );
