@@ -15,6 +15,7 @@ const createClient = initialState => {
     uri: 'http://localhost:6969/graphql',
     // credentials: 'same-origin'
     // credentials: 'include'
+    credentials: 'omit'
     // fetch
   });
 
