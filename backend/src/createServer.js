@@ -6,6 +6,9 @@ export default () =>
   new ApolloServer({
     typeDefs,
     resolvers,
+    context: ({ req, res }) => {
+      return { req, res };
+    },
     tracing: true,
     introspection: true,
     playground: true
