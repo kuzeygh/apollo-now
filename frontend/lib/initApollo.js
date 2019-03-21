@@ -5,18 +5,13 @@ import fetch from 'isomorphic-unfetch';
 
 let apolloClient = null;
 
-// Polyfill fetch() on the server (used by apollo-client)
-if (!process.browser) {
-  global.fetch = fetch;
-}
-
 const createClient = initialState => {
   const httpLink = createHttpLink({
     uri: 'http://localhost:6969/graphql',
     // credentials: 'same-origin'
     // credentials: 'include'
-    credentials: 'omit'
-    // fetch
+    // credentials: 'omit'
+    fetch
   });
 
   return new ApolloClient({
