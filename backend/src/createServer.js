@@ -7,6 +7,8 @@ export default () =>
     typeDefs,
     resolvers,
     context: ({ req, res }) => {
+      console.log(process.env.JWT_SECRET);
+
       return { req, res };
     },
     tracing: true,
