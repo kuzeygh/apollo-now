@@ -4,6 +4,7 @@ import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
+import { devGraphQLEndpoint, prodGraphQLEndpoint } from '../config';
 
 export default withApollo(
   ({ ctx, headers, initialState }) => {
@@ -27,7 +28,10 @@ export default withApollo(
     });
 
     const httpLink = createHttpLink({
-      uri: 'http://localhost:6969/graphql'
+      uri:
+        process.env.NODE_ENV === 'development'
+          ? devGraphQLEndpoint
+          : prodGraphQLEndpoint
       // credentials: 'same-origin',
       // credentials: 'include',
     });
