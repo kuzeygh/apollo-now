@@ -1,61 +1,45 @@
-import Head from 'next/head';
-import { getDataFromTree } from 'react-apollo';
-import initApollo from './initApollo';
+import withApollo from 'next-with-apollo';
+import ApolloClient from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { onError } from 'apollo-link-error';
+import { ApolloLink } from 'apollo-link';
 
-export default App =>
-  class Apollo extends React.PureComponent {
-    static displayName = 'withApollo(App)';
-
-    static async getInitialProps(ctx) {
-      const { Component, router } = ctx;
-
-      let appProps = {};
-      if (App.getInitialProps) {
-        appProps = await App.getInitialProps(ctx);
+export default withApollo(
+  ({ ctx, headers, initialState }) => {
+    const errorLink = onError(({ graphQLErrors, networkError }) => {
+      if (graphQLErrors)
+        graphQLErrors.map(({ message, locations, path }) =>
+          console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+          )
+        );
+      if (networkError) {
+        console.log(`[Network error]: ${networkError}`);
       }
+    });
 
-      // Run all GraphQL queries in the component tree
-      // and extract the resulting data
-      const apollo = initApollo();
-      if (!process.browser) {
-        try {
-          // Run all GraphQL queries
-          await getDataFromTree(
-            <App
-              {...appProps}
-              Component={Component}
-              router={router}
-              apolloClient={apollo}
-            />
-          );
-        } catch (error) {
-          // Prevent Apollo Client GraphQL errors from crashing SSR.
-          // Handle them in components via the data.error prop:
-          // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
-          // eslint-disable-next-line no-console
-          console.error('Error while running `getDataFromTree`', error);
-        }
+    const authLink = new ApolloLink((operation, forward) => {
+      operation.setContext({
+        headers
+      });
+      return forward(operation);
+    });
 
-        // getDataFromTree does not call componentWillUnmount
-        // head side effect therefore need to be cleared manually
-        Head.rewind();
-      }
+    const httpLink = createHttpLink({
+      uri: 'http://localhost:6969/graphql'
+      // credentials: 'same-origin',
+      // credentials: 'include',
+    });
 
-      // Extract query data from the Apollo store
-      const apolloState = apollo.cache.extract();
-
-      return {
-        ...appProps,
-        apolloState
-      };
-    }
-
-    constructor(props) {
-      super(props);
-      this.apolloClient = initApollo(props.apolloState);
-    }
-
-    render() {
-      return <App {...this.props} apolloClient={this.apolloClient} />;
-    }
-  };
+    return new ApolloClient({
+      link: ApolloLink.from([errorLink, authLink, httpLink]),
+      cache: new InMemoryCache().restore(initialState || {}),
+      ssrMode: !process.browser,
+      connectToDevTools: process.browser
+    });
+  },
+  {
+    getDataFromTree: 'ssr'
+  }
+);
