@@ -1,3 +1,5 @@
+// no CORS settings server-side
+
 // Request URL: http://localhost:6969/graphql
 // Request Method: OPTIONS
 // Status Code: 204 No Content
