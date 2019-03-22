@@ -8,25 +8,23 @@ import { prisma } from '../prisma/generated/prisma-client';
 
 const typeDefs = gql`
   type User {
-    id: ID!
+    id: Int!
     email: String!
     password: String!
   }
 
   type Query {
-    user(id: ID!): User
     users: [User]!
   }
 `;
 
 const resolvers = {
   Query: {
-    user: (parent, args, ctx, info) => {
-      return ctx.prisma.user({ id: args.id });
-    },
-
     users: (parent, args, ctx, info) => {
-      return ctx.prisma.users();
+      return [
+        { id: '1', email: 'email1@email.com', password: 'pass1' },
+        { id: '2', email: 'email2@email.com', password: 'pass2' }
+      ];
     }
   }
 };
@@ -35,7 +33,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default () =>
   new ApolloServer({
-    schema,
+    typeDefs,
     resolvers,
     context: ({ req, res }) => {
       return { req, res, prisma };
