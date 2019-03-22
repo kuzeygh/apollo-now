@@ -6,8 +6,6 @@ import { prisma } from '../prisma/generated/prisma-client';
 // const typeDefs = importSchema(path.resolve('./src/schema/schema.graphql'));
 // console.log('TCL: typeDefs', typeDefs);
 
-// const schema = makeExecutableSchema({ typeDefs, resolvers });
-
 const typeDefs = gql`
   type User {
     id: ID!
@@ -33,9 +31,11 @@ const resolvers = {
   }
 };
 
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+
 export default () =>
   new ApolloServer({
-    typeDefs,
+    schema,
     resolvers,
     context: ({ req, res }) => {
       return { req, res, prisma };
