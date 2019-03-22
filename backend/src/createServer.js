@@ -3,7 +3,7 @@ import { importSchema } from 'graphql-import';
 import { prisma } from '../prisma/generated/prisma-client';
 import resolvers from './resolvers';
 const path = require('path');
-const typeDefs = importSchema(path.normalize('./src/schema/schema.graphql'));
+const typeDefs = importSchema(path.join(__dirname, './schema/schema.graphql'));
 console.log('TCL: typeDefs', typeDefs);
 
 export default () =>
