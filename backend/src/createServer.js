@@ -10,15 +10,11 @@ const typeDefs = importSchema(path.resolve('./src/schema/schema.graphql'));
 //   ${typeDefs}
 // `;
 
-// import { makeExecutableSchema } from 'graphql-tools';
-
-// const typeDefs = importSchema('./src/schema/schema.graphql');
-
-// const schema = makeExecutableSchema({ typeDefs, resolvers });
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default () =>
   new ApolloServer({
-    typeDefs,
+    schema,
     resolvers,
     context: ({ req, res }) => {
       return { req, res, prisma };
