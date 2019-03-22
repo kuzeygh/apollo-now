@@ -8,7 +8,7 @@ import { prisma } from '../prisma/generated/prisma-client';
 
 const typeDefs = gql`
   type User {
-    id: Int!
+    id: ID!
     email: String!
     password: String!
   }
@@ -21,10 +21,11 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     users: (parent, args, ctx, info) => {
-      return [
-        { id: '1', email: 'email1@email.com', password: 'pass1' },
-        { id: '2', email: 'email2@email.com', password: 'pass2' }
-      ];
+      return ctx.prisma.users();
+      // return [
+      //   { id: '1', email: 'email1@email.com', password: 'pass1' },
+      //   { id: '2', email: 'email2@email.com', password: 'pass2' }
+      // ];
     }
   }
 };
