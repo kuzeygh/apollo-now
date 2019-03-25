@@ -7,4 +7,4 @@
 # add your own imports at the end of the file like so: # import * from "./MyFile.graphql"
 
 # import * from '../../prisma/generated/prisma.graphql'
-# import Query.*, Mutation.* from "user.graphql"
+# import Query.* from "user.graphql"

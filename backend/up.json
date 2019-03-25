@@ -1,0 +1,5 @@
+{
+  "name": "apollo-now",
+  "profile": "default",
+  "regions": ["us-east-2"]
+}

@@ -30,7 +30,7 @@ const resolvers = {
   }
 };
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+// const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 export default () =>
   new ApolloServer({

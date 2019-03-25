@@ -8,20 +8,20 @@ const server = createServer();
 
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  // const { token } = req.cookies;
-  console.log(' : ---------------');
-  console.log(' : req.cookies', req.cookies);
-  console.log(' : ---------------');
+// app.use((req, res, next) => {
+//   // const { token } = req.cookies;
+//   // console.log(' : ---------------');
+//   // console.log(' : req', req);
+//   // console.log(' : ---------------');
 
-  // if (token) {
-  //   const { userId } = jwt.verify(token, process.env.JWT_SECRET);
-  //   // Put the userId onto the req for future requests to access
-  //   req.userId = userId;
-  // }
+//   // if (token) {
+//   //   const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+//   //   // Put the userId onto the req for future requests to access
+//   //   req.userId = userId;
+//   // }
 
-  next();
-});
+//   next();
+// });
 
 server.applyMiddleware({ app, path: '/graphql' });
 
